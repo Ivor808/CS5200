@@ -1,4 +1,4 @@
-package blog.dal;
+package blog.model;
 
 public class FoodCartRestaurants {
 
