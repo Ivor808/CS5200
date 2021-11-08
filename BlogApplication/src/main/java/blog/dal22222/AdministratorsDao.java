@@ -74,7 +74,7 @@ public class AdministratorsDao extends PersonsDao {
 	 * This runs a DELETE statement.
 	 */
 	public Administrators delete(Administrators administrator) throws SQLException {
-		String deleteAdministrator = "DELETE FROM Administrators WHERE UserName=?;";
+		String deleteAdministrator = "DELETE FROM Administrators  WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {

@@ -1,9 +1,8 @@
 package blog.dal;
 
-import blog.dal22222.PersonsDao;
 import blog.model.Cuisines;
-import blog.model.Persons;
 import blog.model.Restaurants;
+import blog.model.SitDownRestaurants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,18 +10,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantsDao {
+public class SitDownRestaurantsDao extends RestaurantsDao{
 
   protected ConnectionManager connectionManager;
 
   // Single pattern: instantiation is limited to one object.
-  private static RestaurantsDao instance = null;
-  protected RestaurantsDao() {
+  private static SitDownRestaurantsDao instance = null;
+  protected SitDownRestaurantsDao() {
     connectionManager = new ConnectionManager();
   }
-  public static RestaurantsDao getInstance() {
+  public static SitDownRestaurantsDao getInstance() {
     if(instance == null) {
-      instance = new RestaurantsDao();
+      instance = new SitDownRestaurantsDao();
     }
     return instance;
   }
@@ -31,8 +30,8 @@ public class RestaurantsDao {
    * Save the restaurant instance by storing it in your MySQL instance.
    * This runs a INSERT statement.
    */
-  public Restaurants create(Restaurants restaurant) throws SQLException {
-    String insertRestaurant = "INSERT INTO Restaurants(Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+  public SitDownRestaurants create(SitDownRestaurants restaurant) throws SQLException {
+    String insertRestaurant = "INSERT INTO SitDownRestaurant(Capacity) VALUES(?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
     try {
@@ -44,18 +43,7 @@ public class RestaurantsDao {
       // http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
       // For nullable fields, you can check the property first and then call setNull()
       // as applicable.
-      insertStmt.setString(1, restaurant.getName());
-      insertStmt.setString(2, restaurant.getDescription());
-      insertStmt.setString(3, restaurant.getMenu());
-      insertStmt.setString(4, restaurant.getHours());
-      insertStmt.setBoolean(5, restaurant.getActive());
-      insertStmt.setObject(6, restaurant.getCuisine());
-      insertStmt.setString(7, restaurant.getStreet1());
-      insertStmt.setString(8, restaurant.getStreet2());
-      insertStmt.setString(9, restaurant.getCity());
-      insertStmt.setString(10, restaurant.getState());
-      insertStmt.setInt(11, restaurant.getZip());
-      insertStmt.setString(12, restaurant.getCompanyName());
+      insertStmt.setInt(1, restaurant.getCapacity());
       // Note that we call executeUpdate(). This is used for a INSERT/UPDATE/DELETE
       // statements, and it returns an int for the row counts affected (or 0 if the
       // statement returns nothing). For more information, see:
@@ -85,8 +73,8 @@ public class RestaurantsDao {
    * Get the Persons record by fetching it from your MySQL instance.
    * This runs a SELECT statement and returns a single Persons instance.
    */
-  public Restaurants getRestaurantById(int restaurantId) throws SQLException {
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE restaurantId=?;";
+  public SitDownRestaurants getSitDownRestaurantById(int restaurantId) throws SQLException {
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,SitDownRestaurants.capacity as capacity FROM SitDownRestaurants inner join Restaurants on SitDownRestaurants.RestaurantId = Restaurants.RestaurantId WHERE restaurantId=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -115,7 +103,8 @@ public class RestaurantsDao {
         String state = results.getString("state");
         Integer zip  =  results.getInt("zip");
         String companyName = results.getString("companyname");
-        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,companyName);
+        Integer capacity = results.getInt("capacity");
+        SitDownRestaurants restaurant = new SitDownRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,companyName, capacity);
         return restaurant;
       }
     } catch (SQLException e) {
@@ -135,60 +124,9 @@ public class RestaurantsDao {
     return null;
   }
 
-  public List<Restaurants> getRestaurantsByCuisine(Cuisines cuisine) throws SQLException{
-    List<Restaurants> restaurants = new ArrayList<Restaurants>();
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE cuisine=?;";
-    Connection connection = null;
-    PreparedStatement selectStmt = null;
-    ResultSet results = null;
-    try {
-      connection = connectionManager.getConnection();
-      selectStmt = connection.prepareStatement(selectRestaurant);
-      selectStmt.setObject(1, cuisine);
-      // Note that we call executeQuery(). This is used for a SELECT statement
-      // because it returns a result set. For more information, see:
-      // http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
-      // http://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html
-      results = selectStmt.executeQuery();
-      // You can iterate the result set (although the example below only retrieves
-      // the first record). The cursor is initially positioned before the row.
-      // Furthermore, you can retrieve fields by name and by type.
-      if(results.next()) {
-        String name =results.getString("name");
-        String description = results.getString("description");
-        String menu = results.getString("menu");
-        String hours = results.getString("hours");
-        Boolean active = results.getBoolean("active");
-        Object resultCuisine = results.getObject("cuisine");
-        String street1 = results.getString("street1");
-        String street2 = results.getString("street2");
-        String city = results.getString("city");
-        String state = results.getString("state");
-        Integer zip  =  results.getInt("zip");
-        String companyName = results.getString("companyname");
-        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, (Cuisines) resultCuisine,street1,street2,city,state,zip,companyName);
-        restaurants.add(restaurant);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-      throw e;
-    } finally {
-      if(connection != null) {
-        connection.close();
-      }
-      if(selectStmt != null) {
-        selectStmt.close();
-      }
-      if(results != null) {
-        results.close();
-      }
-    }
-    return restaurants;
-  }
-
-  public List<Restaurants> getRestaurantsByCompanyName(String companyName) throws SQLException{
-    List<Restaurants> restaurants = new ArrayList<Restaurants>();
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE companyname=?;";
+  public List<SitDownRestaurants> getSitDownRestaurantsByCompanyName(String companyName) throws SQLException {
+    List<SitDownRestaurants> restaurants = new ArrayList<SitDownRestaurants>();
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,SitDownRestaurants.capacity as capacity FROM SitDownRestaurants inner join Restaurants on SitDownRestaurants.RestaurantId = Restaurants.RestaurantId WHERE companyname=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -217,7 +155,8 @@ public class RestaurantsDao {
         String state = results.getString("state");
         Integer zip  =  results.getInt("zip");
         String resultCompanyName = results.getString("companyname");
-        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,resultCompanyName);
+        Integer capacity = results.getInt("capacity");
+        SitDownRestaurants restaurant = new SitDownRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,resultCompanyName, capacity);
         restaurants.add(restaurant);
       }
     } catch (SQLException e) {
@@ -237,21 +176,33 @@ public class RestaurantsDao {
     return restaurants;
   }
 
-  /**
-   * Delete the restaurant instance.
-   * This runs a DELETE statement.
-   */
-  public Restaurants delete(Restaurants restaurant) throws SQLException {
-    String deleteRestaurant = "DELETE FROM Restaurant WHERE name=?;";
+
+  public SitDownRestaurants delete(SitDownRestaurants sitDownRestaurant) throws SQLException {
+    String deleteSitDownRestaurants = "DELETE FROM SitDownRestaurants join Restaurants on SitDownRestaurants.RestaurantId = Restaurants.RestaurantId WHERE Restaurants.name=?;";
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {
       connection = connectionManager.getConnection();
-      deleteStmt = connection.prepareStatement(deleteRestaurant);
-      deleteStmt.setString(1, restaurant.getName());
-      deleteStmt.executeUpdate();
+      deleteStmt = connection.prepareStatement(deleteSitDownRestaurants);
+      deleteStmt.setString(1, sitDownRestaurant.getName());
+      int affectedRows = deleteStmt.executeUpdate();
+      if (affectedRows == 0) {
+        throw new SQLException("No records available to delete for UserName=" + sitDownRestaurant.getName());
+      }
 
-      // Return null so the caller can no longer operate on the Persons instance.
+      // Then also delete from the superclass.
+      // Notes:
+      // 1. Due to the fk constraint (ON DELETE CASCADE), we could simply call
+      //    super.delete() without even needing to delete from Administrators first.
+      // 2. BlogPosts has a fk constraint on BlogUsers with the reference option
+      //    ON DELETE SET NULL. If the BlogPosts fk reference option was instead
+      //    ON DELETE RESTRICT, then the caller would need to delete the referencing
+      //    BlogPosts before this BlogUser can be deleted.
+      //    Example to delete the referencing BlogPosts:
+      //    List<BlogPosts> posts = BlogPostsDao.getBlogPostsForUser(blogUser.getUserName());
+      //    for(BlogPosts p : posts) BlogPostsDao.delete(p);
+      super.delete(sitDownRestaurant);
+
       return null;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -265,5 +216,6 @@ public class RestaurantsDao {
       }
     }
   }
+
 
 }
