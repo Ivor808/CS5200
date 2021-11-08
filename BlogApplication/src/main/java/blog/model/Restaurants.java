@@ -2,12 +2,11 @@ package blog.model;
 
 public class Restaurants {
 
-    protected Integer RestaurantId;
     protected String name;
     protected String description;
     protected String menu;
     protected String hours;
-    protected String active;
+    protected boolean active;
     protected Cuisines cuisine;
     protected String street1;
     protected String street2;
@@ -16,8 +15,7 @@ public class Restaurants {
     protected Integer zip;
     protected String companyName;
 
-    public Restaurants(Integer restaurantId, String name, String description, String menu, String hours, String active, Cuisines cuisine, String street1, String street2, String city, String state, Integer zip, String companyName) {
-        RestaurantId = restaurantId;
+    public Restaurants(String name, String description, String menu, String hours, boolean active, Cuisines cuisine, String street1, String street2, String city, String state, Integer zip, String companyName) {
         this.name = name;
         this.description = description;
         this.menu = menu;
@@ -32,13 +30,6 @@ public class Restaurants {
         this.companyName = companyName;
     }
 
-    public Integer getRestaurantId() {
-        return RestaurantId;
-    }
-
-    public void setRestaurantId(Integer restaurantId) {
-        RestaurantId = restaurantId;
-    }
 
     public String getName() {
         return name;
@@ -72,11 +63,11 @@ public class Restaurants {
         this.hours = hours;
     }
 
-    public String getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
