@@ -104,6 +104,76 @@ public class Inserter {
 			System.out.println(r.getName());
 		}
 
+		CreditCards cc3 =  creditCardsDao.getCreditCardByCardNumber(445L);
+		System.out.println("cc3 is " + cc3.getCardNumber());
+
+		List<CreditCards> cc4 = creditCardsDao.getCreditCardsByUserName("a");
+		for (CreditCards c: cc4) {
+			System.out.println(c.getCardNumber());
+		}
+		FoodCartRestaurants fc3 = foodCartRestaurantsDao.getFoodCartRestaurantById(6);
+		System.out.println("fc3 is " + fc3.getName());
+		List<FoodCartRestaurants> fc4 = foodCartRestaurantsDao.getFoodCartRestaurantsByCompanyName("company2");
+		for (FoodCartRestaurants fc: fc4) {
+			System.out.println(fc.getName());
+		}
+
+		Recommendations rec3 = recommendationsDao.getRecommendationById(1);
+		System.out.println("Rec3 is " + rec3.getUserName());
+
+		List<Recommendations> recs = recommendationsDao.getRecommendationsByRestaurantId(3);
+		for(Recommendations rec: recs) {
+			System.out.println(rec.getRestaurantId());
+		}
+
+		recs = recommendationsDao.getRecommendationsByUserName("Bruce");
+		for(Recommendations rec: recs) {
+			System.out.println(rec.getUserName());
+		}
+
+		Reservations res4 = reservationsDao.getReservationById(1);
+		System.out.println("Res4 is " + res4.getStart());
+
+		List<Reservations> rezs =  reservationsDao.getReservationsByUserName("Bruce");
+		for(Reservations r: rezs) {
+			System.out.println(r.getUserName());
+		}
+
+		rezs = reservationsDao.getReservationsBySitDownRestaurantId(1);
+		for(Reservations r: rezs) {
+			System.out.println(r.getUserName());
+		}
+
+		Reviews rev3 = reviewsDao.getReviewById(1);
+		System.out.println("rev3 is " + rev3.getUserName());
+
+		List<Reviews> revs = reviewsDao.getReviewsByRestaurantId(9);
+		for(Reviews r: revs) {
+			System.out.println(r.getRestaurantId());
+		}
+
+		revs = reviewsDao.getReviewsByUserName("Bruce");
+		for(Reviews r: revs) {
+			System.out.println(r.getUserName());
+		}
+
+		SitDownRestaurants sr4 = sitDownRestaurantsDao.getSitDownRestaurantById(1);
+		System.out.println("sr4 is " + sr4.getCapacity());
+
+		List<SitDownRestaurants> srs = sitDownRestaurantsDao.getSitDownRestaurantsByCompanyName("company1");
+		for(SitDownRestaurants sr: srs) {
+			System.out.println(sr.getCompanyName());
+		}
+		TakeOutRestaurants tr4 = takeOutRestaurantsDao.getTakeOutRestaurantById(4);
+		System.out.println("tr4 is" + tr4.getName());
+
+		List<TakeOutRestaurants> trs = takeOutRestaurantsDao.getTakeOutRestaurantsByCompanyName("company1");
+		for(TakeOutRestaurants tr: trs) {
+			System.out.println(tr.getCompanyName());
+		}
+
+
+
 
 	}
 }
