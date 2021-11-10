@@ -44,6 +44,7 @@ public class Inserter {
 		UsersDao usersDao = UsersDao.getInstance();
 
 		Date date = new Date(552020);
+		// CREATE
 		// INSERT objects from our model.
 		Users user = new Users("a", "pass", "abba", "foo", "foo", 51451433);
 		Users user2 = new Users("b", "pass", "baaba", "foo", "email", 123413241);
