@@ -1,8 +1,6 @@
 package blog.dal;
 
-import blog.dal22222.PersonsDao;
 import blog.model.Cuisines;
-import blog.model.Persons;
 import blog.model.Restaurants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +30,7 @@ public class RestaurantsDao {
    * This runs a INSERT statement.
    */
   public Restaurants create(Restaurants restaurant) throws SQLException {
-    String insertRestaurant = "INSERT INTO Restaurants(Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+    String insertRestaurant = "INSERT INTO Restaurants(Name,Description,Menu,Hours,Active,cuisinetype,Street1,Street2,City,State,Zip,CompanyName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
     try {

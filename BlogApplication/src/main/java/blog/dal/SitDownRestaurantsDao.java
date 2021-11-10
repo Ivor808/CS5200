@@ -10,27 +10,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SitDownRestaurantsDao extends RestaurantsDao{
+public class SitDownRestaurantsDao extends RestaurantsDao {
 
   protected ConnectionManager connectionManager;
 
   // Single pattern: instantiation is limited to one object.
   private static SitDownRestaurantsDao instance = null;
+
   protected SitDownRestaurantsDao() {
     connectionManager = new ConnectionManager();
   }
+
   public static SitDownRestaurantsDao getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new SitDownRestaurantsDao();
     }
     return instance;
   }
 
   /**
-   * Save the restaurant instance by storing it in your MySQL instance.
-   * This runs a INSERT statement.
+   * Save the restaurant instance by storing it in your MySQL instance. This runs a INSERT
+   * statement.
    */
   public SitDownRestaurants create(SitDownRestaurants sitDownRestaurant) throws SQLException {
+    create(new Restaurants(sitDownRestaurant.getName(), sitDownRestaurant.getDescription(),
+        sitDownRestaurant.getMenu(), sitDownRestaurant.getHours(), sitDownRestaurant.getActive(),
+        sitDownRestaurant.getCuisine(), sitDownRestaurant.getStreet1(),
+        sitDownRestaurant.getStreet2(), sitDownRestaurant.getCity(), sitDownRestaurant.getState(),
+        sitDownRestaurant.getZip(), sitDownRestaurant.getCompanyName()));
     String insertRestaurant = "INSERT INTO SitDownRestaurant(Capacity) VALUES(?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
@@ -60,18 +67,18 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
       e.printStackTrace();
       throw e;
     } finally {
-      if(connection != null) {
+      if (connection != null) {
         connection.close();
       }
-      if(insertStmt != null) {
+      if (insertStmt != null) {
         insertStmt.close();
       }
     }
   }
 
   /**
-   * Get the Persons record by fetching it from your MySQL instance.
-   * This runs a SELECT statement and returns a single Persons instance.
+   * Get the Persons record by fetching it from your MySQL instance. This runs a SELECT statement
+   * and returns a single Persons instance.
    */
   public SitDownRestaurants getSitDownRestaurantById(int restaurantId) throws SQLException {
     String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,SitDownRestaurant.capacity as capacity FROM SitDownRestaurant inner join Restaurants on SitDownRestaurant.RestaurantId = Restaurants.RestaurantId WHERE restaurantId=?;";
@@ -90,8 +97,8 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
       // You can iterate the result set (although the example below only retrieves
       // the first record). The cursor is initially positioned before the row.
       // Furthermore, you can retrieve fields by name and by type.
-      if(results.next()) {
-        String name =results.getString("name");
+      if (results.next()) {
+        String name = results.getString("name");
         String description = results.getString("description");
         String menu = results.getString("menu");
         String hours = results.getString("hours");
@@ -101,30 +108,32 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
         String street2 = results.getString("street2");
         String city = results.getString("city");
         String state = results.getString("state");
-        Integer zip  =  results.getInt("zip");
+        Integer zip = results.getInt("zip");
         String companyName = results.getString("companyname");
         Integer capacity = results.getInt("capacity");
-        SitDownRestaurants restaurant = new SitDownRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,companyName, capacity);
+        SitDownRestaurants restaurant = new SitDownRestaurants(name, description, menu, hours,
+            active, (Cuisines) cuisine, street1, street2, city, state, zip, companyName, capacity);
         return restaurant;
       }
     } catch (SQLException e) {
       e.printStackTrace();
       throw e;
     } finally {
-      if(connection != null) {
+      if (connection != null) {
         connection.close();
       }
-      if(selectStmt != null) {
+      if (selectStmt != null) {
         selectStmt.close();
       }
-      if(results != null) {
+      if (results != null) {
         results.close();
       }
     }
     return null;
   }
 
-  public List<SitDownRestaurants> getSitDownRestaurantsByCompanyName(String companyName) throws SQLException {
+  public List<SitDownRestaurants> getSitDownRestaurantsByCompanyName(String companyName)
+      throws SQLException {
     List<SitDownRestaurants> restaurants = new ArrayList<SitDownRestaurants>();
     String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,SitDownRestaurant.capacity as capacity FROM SitDownRestaurant inner join Restaurants on SitDownRestaurant.RestaurantId = Restaurants.RestaurantId WHERE companyname=?;";
     Connection connection = null;
@@ -142,8 +151,8 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
       // You can iterate the result set (although the example below only retrieves
       // the first record). The cursor is initially positioned before the row.
       // Furthermore, you can retrieve fields by name and by type.
-      if(results.next()) {
-        String name =results.getString("name");
+      if (results.next()) {
+        String name = results.getString("name");
         String description = results.getString("description");
         String menu = results.getString("menu");
         String hours = results.getString("hours");
@@ -153,23 +162,25 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
         String street2 = results.getString("street2");
         String city = results.getString("city");
         String state = results.getString("state");
-        Integer zip  =  results.getInt("zip");
+        Integer zip = results.getInt("zip");
         String resultCompanyName = results.getString("companyname");
         Integer capacity = results.getInt("capacity");
-        SitDownRestaurants restaurant = new SitDownRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,resultCompanyName, capacity);
+        SitDownRestaurants restaurant = new SitDownRestaurants(name, description, menu, hours,
+            active, (Cuisines) cuisine, street1, street2, city, state, zip, resultCompanyName,
+            capacity);
         restaurants.add(restaurant);
       }
     } catch (SQLException e) {
       e.printStackTrace();
       throw e;
     } finally {
-      if(connection != null) {
+      if (connection != null) {
         connection.close();
       }
-      if(selectStmt != null) {
+      if (selectStmt != null) {
         selectStmt.close();
       }
-      if(results != null) {
+      if (results != null) {
         results.close();
       }
     }
@@ -187,7 +198,8 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
       deleteStmt.setString(1, sitDownRestaurant.getName());
       int affectedRows = deleteStmt.executeUpdate();
       if (affectedRows == 0) {
-        throw new SQLException("No records available to delete for UserName=" + sitDownRestaurant.getName());
+        throw new SQLException(
+            "No records available to delete for UserName=" + sitDownRestaurant.getName());
       }
 
       // Then also delete from the superclass.
@@ -208,10 +220,10 @@ public class SitDownRestaurantsDao extends RestaurantsDao{
       e.printStackTrace();
       throw e;
     } finally {
-      if(connection != null) {
+      if (connection != null) {
         connection.close();
       }
-      if(deleteStmt != null) {
+      if (deleteStmt != null) {
         deleteStmt.close();
       }
     }

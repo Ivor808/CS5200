@@ -1,6 +1,7 @@
 package blog.dal;
 
 import blog.model.Cuisines;
+import blog.model.Restaurants;
 import blog.model.SitDownRestaurants;
 import blog.model.TakeOutRestaurants;
 import java.sql.Connection;
@@ -31,6 +32,11 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
    * This runs a INSERT statement.
    */
   public TakeOutRestaurants create(TakeOutRestaurants restaurant) throws SQLException {
+    create(new Restaurants(restaurant.getName(), restaurant.getDescription(),
+        restaurant.getMenu(), restaurant.getHours(), restaurant.getActive(),
+        restaurant.getCuisine(), restaurant.getStreet1(),
+        restaurant.getStreet2(), restaurant.getCity(), restaurant.getState(),
+        restaurant.getZip(), restaurant.getCompanyName()));
     String insertRestaurant = "INSERT INTO TakeOutRestaurant(Maxwaittime) VALUES(?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;

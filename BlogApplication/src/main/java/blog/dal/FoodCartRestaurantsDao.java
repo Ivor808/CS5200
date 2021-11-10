@@ -2,6 +2,7 @@ package blog.dal;
 
 import blog.model.Cuisines;
 import blog.model.FoodCartRestaurants;
+import blog.model.Restaurants;
 import blog.model.SitDownRestaurants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,6 +32,11 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
    * This runs a INSERT statement.
    */
   public FoodCartRestaurants create(FoodCartRestaurants foodCartRestaurant) throws SQLException {
+    create(new Restaurants(foodCartRestaurant.getName(), foodCartRestaurant.getDescription(),
+        foodCartRestaurant.getMenu(), foodCartRestaurant.getHours(), foodCartRestaurant.getActive(),
+        foodCartRestaurant.getCuisine(), foodCartRestaurant.getStreet1(),
+        foodCartRestaurant.getStreet2(), foodCartRestaurant.getCity(), foodCartRestaurant.getState(),
+        foodCartRestaurant.getZip(), foodCartRestaurant.getCompanyName()));
     String insertRestaurant = "INSERT INTO FoodCartRestaurant(licensed) VALUES(?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;

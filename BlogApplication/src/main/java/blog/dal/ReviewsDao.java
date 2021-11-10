@@ -1,7 +1,6 @@
 package blog.dal;
 
-import blog.dal22222.PersonsDao;
-import blog.model.Persons;
+
 import blog.model.Reviews;
 import java.sql.Connection;
 import java.sql.Date;

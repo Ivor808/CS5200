@@ -1,10 +1,21 @@
 package blog.tools;
 
-import blog.dal22222.*;
+import blog.dal.CompaniesDao;
+import blog.dal.CreditCardsDao;
+import blog.dal.FoodCartRestaurantsDao;
+import blog.dal.RecommendationsDao;
+import blog.dal.ReservationsDao;
+import blog.dal.RestaurantsDao;
+import blog.dal.ReviewsDao;
+import blog.dal.SitDownRestaurantsDao;
+import blog.dal.TakeOutRestaurantsDao;
+import blog.dal.UsersDao;
 import blog.model.*;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,103 +31,79 @@ public class Inserter {
 
 	public static void main(String[] args) throws SQLException {
 		// DAO instances.
-		PersonsDao personsDao = PersonsDao.getInstance();
-		AdministratorsDao administratorsDao = AdministratorsDao.getInstance();
-		BlogUsersDao blogUsersDao = BlogUsersDao.getInstance();
-		BlogPostsDao blogPostsDao = BlogPostsDao.getInstance();
-		BlogCommentsDao blogCommentsDao = BlogCommentsDao.getInstance();
-		ResharesDao resharesDao = ResharesDao.getInstance();
-		
+		CompaniesDao companiesDao = CompaniesDao.getInstance();
+		CreditCardsDao creditCardsDao = CreditCardsDao.getInstance();
+		FoodCartRestaurantsDao foodCartRestaurantsDao = FoodCartRestaurantsDao.getInstance();
+		RecommendationsDao recommendationsDao = RecommendationsDao.getInstance();
+		ReservationsDao blogCommentsDao = ReservationsDao.getInstance();
+		RestaurantsDao restaurantsDao = RestaurantsDao.getInstance();
+		ReservationsDao reservationsDao = ReservationsDao.getInstance();
+		ReviewsDao reviewsDao = ReviewsDao.getInstance();
+		SitDownRestaurantsDao sitDownRestaurantsDao = SitDownRestaurantsDao.getInstance();
+		TakeOutRestaurantsDao takeOutRestaurantsDao = TakeOutRestaurantsDao.getInstance();
+		UsersDao usersDao = UsersDao.getInstance();
+
+		Date date = new Date(552020);
 		// INSERT objects from our model.
-		Persons person = new Persons("b", "bruce", "chhay");
-		person = personsDao.create(person);
-		Persons person1 = new Persons("b1", "bruce", "chhay");
-		person1 = personsDao.create(person1);
-		Persons person2 = new Persons("b2", "bruce", "chhay");
-		person2 = personsDao.create(person2);
-		Date date = new Date();
-		Administrators administrator = new Administrators("a", "bruce", "chhay_a", date);
-		administrator = administratorsDao.create(administrator);
-		Administrators administrator1 = new Administrators("a1", "bruce", "chhay_a1", date);
-		administrator1 = administratorsDao.create(administrator1);
-		Administrators administrator2 = new Administrators("a2", "bruce", "chhay_a2", date);
-		administrator2 = administratorsDao.create(administrator2);
-		BlogUsers blogUser = new BlogUsers("bu", "bruce", "chhay", date, BlogUsers.StatusLevel.novice);
-		blogUser = blogUsersDao.create(blogUser);
-		BlogUsers blogUser1 = new BlogUsers("bu1", "bruce", "chhay_bu1", date, BlogUsers.StatusLevel.intermediate);
-		blogUser1 = blogUsersDao.create(blogUser1);
-		BlogUsers blogUser2 = new BlogUsers("bu2", "bruce", "chhay_bu2", date, BlogUsers.StatusLevel.advanced);
-		blogUser2 = blogUsersDao.create(blogUser2);
-		BlogPosts blogPost = new BlogPosts("Laser Cats", "pic", "content", true, date, blogUser);
-		blogPost = blogPostsDao.create(blogPost);
-		BlogPosts blogPost1 = new BlogPosts("Dancing Cats", "pic1", "content1", true, date, blogUser);
-		blogPost1 = blogPostsDao.create(blogPost1);
-		BlogPosts blogPost2 = new BlogPosts("Sleeping Cats", "pic2", "content2", true, date, blogUser);
-		blogPost2 = blogPostsDao.create(blogPost2);
-		BlogComments blogComment = new BlogComments("Comment", date, blogPost, blogUser1);
-		blogComment = blogCommentsDao.create(blogComment);
-		BlogComments blogComment1 = new BlogComments("Comment1", date, blogPost, blogUser1);
-		blogComment1 = blogCommentsDao.create(blogComment1);
-		BlogComments blogComment2 = new BlogComments("Comment2", date, blogPost, blogUser1);
-		blogComment2 = blogCommentsDao.create(blogComment2);
-		BlogComments blogComment3 = new BlogComments("Comment3", date, blogPost, blogUser);
-		blogComment = blogCommentsDao.create(blogComment3);
-		BlogComments blogComment4 = new BlogComments("Comment4", date, blogPost, blogUser);
-		blogComment1 = blogCommentsDao.create(blogComment4);
-		BlogComments blogComment5 = new BlogComments("Comment5", date, blogPost, blogUser);
-		blogComment2 = blogCommentsDao.create(blogComment5);
-		Reshares reshare = new Reshares(blogUser2, blogPost);
-		reshare = resharesDao.create(reshare);
-		Reshares reshare1 = new Reshares(blogUser2, blogPost1);
-		reshare1 = resharesDao.create(reshare1);
-		Reshares reshare2 = new Reshares(blogUser2, blogPost2);
-		reshare2 = resharesDao.create(reshare2);
-		
+		Users user = new Users("a", "pass", "abba", "foo", "foo", 51451433);
+		Users user2 = new Users("b", "pass", "baaba", "foo", "email", 123413241);
+		user = usersDao.create(user);
+		user2 = usersDao.create(user2);
+
+		Companies companies1 = new Companies("google", "fooooo");
+		Companies companies2 = new Companies("foobar", "fooooo");
+
+		companies1 = companiesDao.create(companies1);
+		companies2 = companiesDao.create(companies2);
+
+		CreditCards cc1 = new CreditCards(445L, date, "a");
+		CreditCards cc2 = new CreditCards(312314L, date, "b");
+
+		cc1 = creditCardsDao.create(cc1);
+		cc2 = creditCardsDao.create(cc2);
+
+		FoodCartRestaurants fr1 = new FoodCartRestaurants("foo", "bar", "1. foo", "1234", true,
+				Cuisines.AFRICAN, "foo", "b", "seattle", "wa", 98107, "google", true);
+		fr1 = foodCartRestaurantsDao.create(fr1);
+
+		Recommendations rec1 = new Recommendations("a", 1);
+		rec1 = recommendationsDao.create(rec1);
+
+		Reservations res1 = new Reservations(date, date, 2, "a", 1);
+		res1 = reservationsDao.create(res1);
+
+		Reviews rev1 = new Reviews(date, "good good", 5L, "a", 1);
+		rev1 = reviewsDao.create(rev1);
+
+		SitDownRestaurants sr1 = new SitDownRestaurants("bar", "foo", "1. foo", "1234", true,
+				Cuisines.AMERICAN, "foo", "b", "seattle", "wa", 98107, "google", 15);
+		sr1 = sitDownRestaurantsDao.create(sr1);
+
+		TakeOutRestaurants tr1 = new TakeOutRestaurants("take out place", "bar", "1. foo", "1234", true,
+				Cuisines.AFRICAN, "foo", "b", "seattle", "wa", 98107, "google", 15);
+		tr1 = takeOutRestaurantsDao.create(tr1);
+
 		// READ.
-		Persons p1 = personsDao.getPersonFromUserName("b");
-		List<Persons> pList1 = personsDao.getPersonsFromFirstName("bruce");
-		System.out.format("Reading person: u:%s f:%s l:%s \n",
-			p1.getUserName(), p1.getFirstName(), p1.getLastName());
-		for(Persons p : pList1) {
-			System.out.format("Looping persons: u:%s f:%s l:%s \n",
-				p.getUserName(), p.getFirstName(), p.getLastName());
+		Users user1 = usersDao.getUserFromUserName("a");
+		System.out.println("user1 is " + user1.getUserName());
+
+		Companies companies = companiesDao.getCompanyByCompanyName("google");
+		System.out.println("company is " + companies.getCompanyName());
+		companies = companiesDao.updateCompanyAbout(companies, "new about");
+		System.out.println("updated about: " + companies.getAbout());
+
+		Restaurants res = restaurantsDao.getRestaurantById(1);
+		System.out.println("res1 is " + res.getName());
+		List<Restaurants> restaurants = restaurantsDao.getRestaurantsByCuisine(Cuisines.AFRICAN);
+		for (Restaurants r : restaurants) {
+			System.out.println(r.getName());
 		}
-		Administrators a1 = administratorsDao.getAdministratorFromUserName("a");
-		List<Administrators> aList1 = administratorsDao.getAdministratorsFromFirstName("bruce");
-		System.out.format("Reading administrator: u:%s f:%s l:%s d:%s \n",
-			a1.getUserName(), a1.getFirstName(), a1.getLastName(), a1.getLastLogin());
-		for(Administrators a : aList1) {
-			System.out.format("Looping administrators: u:%s f:%s l:%s \n",
-				a.getUserName(), a.getFirstName(), a.getLastName(), a.getLastLogin());
+		System.out.println("---------------");
+		List<Restaurants> companyRestaurants = restaurantsDao.getRestaurantsByCompanyName("google");
+		for (Restaurants r : companyRestaurants) {
+			System.out.println(r.getName());
 		}
-		BlogUsers bu1 = blogUsersDao.getBlogUserFromUserName("bu");
-		List<BlogUsers> buList1 = blogUsersDao.getBlogUsersFromFirstName("bruce");
-		System.out.format("Reading blog user: u:%s f:%s l:%s d:%s s:%s \n",
-			bu1.getUserName(), bu1.getFirstName(), bu1.getLastName(), bu1.getDob(), bu1.getStatusLevel().name());
-		for(BlogUsers bu : buList1) {
-			System.out.format("Looping blog users: u:%s f:%s l:%s d:%s s:%s \n",
-				bu.getUserName(), bu.getFirstName(), bu.getLastName(), bu.getDob(), bu.getStatusLevel().name());
-		}
-		List<BlogPosts> bpList1 = blogPostsDao.getBlogPostsForUser(bu1);
-		for(BlogPosts bp : bpList1) {
-			System.out.format("Looping blog posts: t:%s c:%s u:%s \n",
-				bp.getTitle(), bp.getContent(), bu1.getUserName());
-		}
-		List<BlogComments> bcList1 = blogCommentsDao.getBlogCommentsForUser(blogUser1);
-		for(BlogComments bc : bcList1) {
-			System.out.format("Looping blog comments: t:%s u:%s \n",
-				bc.getContent(), blogUser1.getUserName());
-		}
-		bcList1 = blogCommentsDao.getBlogCommentsForUser(blogUser);
-		for(BlogComments bc : bcList1) {
-			System.out.format("Looping blog comments: t:%s u:%s \n",
-				bc.getContent(), blogUser.getUserName());
-		}
-		List<Reshares> rList1 = resharesDao.getResharesForUser(blogUser2);
-		for(Reshares r : rList1) {
-			System.out.format("Looping reshare: i:%s u:%s t:%s \n",
-				r.getReshareId(), r.getBlogUser().getUserName(),
-				r.getBlogPost().getTitle());
-		}
+
+
 	}
 }
