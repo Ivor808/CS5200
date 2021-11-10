@@ -89,8 +89,6 @@ public class Inserter {
 
 		Companies companies = companiesDao.getCompanyByCompanyName("google");
 		System.out.println("company is " + companies.getCompanyName());
-		companies = companiesDao.updateCompanyAbout(companies, "new about");
-		System.out.println("updated about: " + companies.getAbout());
 
 		Restaurants res = restaurantsDao.getRestaurantById(1);
 		System.out.println("res1 is " + res.getName());
@@ -172,6 +170,42 @@ public class Inserter {
 			System.out.println(tr.getCompanyName());
 		}
 
+		// UPDATES
+		companies = companiesDao.updateCompanyAbout(companies, "new about");
+		System.out.println("updated about: " + companies.getAbout());
+		Date d1 = new Date(112021);
+		cc1 = creditCardsDao.updateExpiration(cc1,d1);
+		System.out.println("New date is "+cc1.getExpiration());
+
+		// DELETES
+		companies = companiesDao.delete(companies);
+		System.out.println(companies.getCompanyName());
+		cc1 = creditCardsDao.delete(cc1);
+		System.out.println(cc1.getCardNumber());
+		fr1 = foodCartRestaurantsDao.delete(fr1);
+		System.out.println(fr1.getName());
+		rec1 = recommendationsDao.delete(rec1);
+		System.out.println(rec1.getUserName());
+		res1 = reservationsDao.delete(res1);
+		System.out.println(res1.getUserName());
+		res = restaurantsDao.delete(res);
+		System.out.println(res.getName());
+		rev1 = reviewsDao.delete(rev1);
+		System.out.println(rev1.getUserName());
+		sr1 = sitDownRestaurantsDao.delete(sr1);
+		System.out.println(sr1.getName());
+		tr1 = takeOutRestaurantsDao.delete(tr1);
+		System.out.println(tr1.getName());
+		user1 = usersDao.delete(user1);
+		System.out.println(user1);
+		try {
+			user1 = usersDao.delete(user1);
+		}
+		catch (SQLException sql) {
+			System.out.println("user1 already deleted, proper error thrown");
+
+
+		}
 
 
 
