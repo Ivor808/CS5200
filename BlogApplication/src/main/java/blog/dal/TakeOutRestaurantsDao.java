@@ -37,7 +37,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
         restaurant.getCuisine(), restaurant.getStreet1(),
         restaurant.getStreet2(), restaurant.getCity(), restaurant.getState(),
         restaurant.getZip(), restaurant.getCompanyName()));
-    String insertRestaurant = "INSERT INTO TakeOutRestaurant(Maxwaittime) VALUES(?);";
+    String insertRestaurant = "INSERT INTO TakeOutRestaurant(RestaurantId,Maxwaittime) VALUES((select restaurantId from restaurants where name=? and description=? and menu=? and hours=? and active=? and cuisinetype=? and street1=? and street2=? and city=? and state=? and zip=? and companyName=?),?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
     try {
@@ -49,7 +49,19 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
       // http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
       // For nullable fields, you can check the property first and then call setNull()
       // as applicable.
-      insertStmt.setInt(1, restaurant.getMaxWaitTime());
+      insertStmt.setString(1, restaurant.getName());
+      insertStmt.setString(2, restaurant.getDescription());
+      insertStmt.setString(3, restaurant.getMenu());
+      insertStmt.setString(4, restaurant.getHours());
+      insertStmt.setBoolean(5, restaurant.getActive());
+      insertStmt.setString(6, restaurant.getCuisine().toString());
+      insertStmt.setString(7, restaurant.getStreet1());
+      insertStmt.setString(8, restaurant.getStreet2());
+      insertStmt.setString(9, restaurant.getCity());
+      insertStmt.setString(10, restaurant.getState());
+      insertStmt.setInt(11, restaurant.getZip());
+      insertStmt.setString(12, restaurant.getCompanyName());
+      insertStmt.setInt(13, restaurant.getMaxWaitTime());
       // Note that we call executeUpdate(). This is used for a INSERT/UPDATE/DELETE
       // statements, and it returns an int for the row counts affected (or 0 if the
       // statement returns nothing). For more information, see:
@@ -76,7 +88,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
   }
 
   public TakeOutRestaurants getTakeOutRestaurantById(int takeOutRestaurantId) throws SQLException {
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,Takeoutrestaurant.maxwaittime as maxwaittime FROM Takeoutrestaurant inner join Restaurants on Takeoutrestaurant.RestaurantId = Restaurants.RestaurantId WHERE restaurantId=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName,Takeoutrestaurant.maxwaittime as maxwaittime FROM Takeoutrestaurant inner join Restaurants on Takeoutrestaurant.RestaurantId = Restaurants.RestaurantId WHERE takeoutrestaurant.restaurantId=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -98,7 +110,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object cuisine = results.getObject("cuisine");
+        String cuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
@@ -106,7 +118,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
         Integer zip  =  results.getInt("zip");
         String companyName = results.getString("companyname");
         Integer maxWaitTime = results.getInt("maxwaittime");
-        TakeOutRestaurants restaurant = new TakeOutRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,companyName, maxWaitTime);
+        TakeOutRestaurants restaurant = new TakeOutRestaurants(name,description,menu,hours,active, Cuisines.valueOf(cuisine),street1,street2,city,state,zip,companyName, maxWaitTime);
         return restaurant;
       }
     } catch (SQLException e) {
@@ -128,7 +140,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
 
   public List<TakeOutRestaurants> getTakeOutRestaurantsByCompanyName(String companyName) throws SQLException {
     List<TakeOutRestaurants> restaurants = new ArrayList<TakeOutRestaurants>();
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,TakeOutRestaurant.maxwaittime as maxwaittime FROM TakeOutRestaurant inner join Restaurants on TakeOutRestaurant.RestaurantId = Restaurants.RestaurantId WHERE companyname=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName,TakeOutRestaurant.maxwaittime as maxwaittime FROM TakeOutRestaurant inner join Restaurants on TakeOutRestaurant.RestaurantId = Restaurants.RestaurantId WHERE restaurants.companyname=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -150,7 +162,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object cuisine = results.getObject("cuisine");
+        String cuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
@@ -158,7 +170,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
         Integer zip  =  results.getInt("zip");
         String resultCompanyName = results.getString("companyname");
         Integer maxWaitTime = results.getInt("maxwaittime");
-        TakeOutRestaurants restaurant = new TakeOutRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,resultCompanyName, maxWaitTime);
+        TakeOutRestaurants restaurant = new TakeOutRestaurants(name,description,menu,hours,active, Cuisines.valueOf(cuisine),street1,street2,city,state,zip,resultCompanyName, maxWaitTime);
         restaurants.add(restaurant);
       }
     } catch (SQLException e) {
@@ -179,7 +191,7 @@ public class TakeOutRestaurantsDao extends RestaurantsDao{
   }
 
   public TakeOutRestaurants delete(TakeOutRestaurants takeOutRestaurant) throws SQLException {
-    String deleteRestaurant = "DELETE FROM TakeOutRestaurant join Restaurants on TakeOutRestaurant.RestaurantId = Restaurants.RestaurantId WHERE Restaurants.name=?;";
+    String deleteRestaurant = "DELETE TakeOutRestaurant FROM TakeOutRestaurant join Restaurants on TakeOutRestaurant.RestaurantId = Restaurants.RestaurantId WHERE Restaurants.name=?;";
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {

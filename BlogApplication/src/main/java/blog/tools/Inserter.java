@@ -43,7 +43,7 @@ public class Inserter {
 		TakeOutRestaurantsDao takeOutRestaurantsDao = TakeOutRestaurantsDao.getInstance();
 		UsersDao usersDao = UsersDao.getInstance();
 
-		Date date = new Date(552020);
+		Date date = new Date(System.currentTimeMillis());
 		// CREATE
 		// INSERT objects from our model.
 		Users user = new Users("a", "pass", "abba", "foo", "foo", 51451433);
@@ -180,29 +180,25 @@ public class Inserter {
 
 		// DELETES
 		companies = companiesDao.delete(companies);
-		System.out.println(companies.getCompanyName());
 		cc1 = creditCardsDao.delete(cc1);
-		System.out.println(cc1.getCardNumber());
 		fr1 = foodCartRestaurantsDao.delete(fr1);
-		System.out.println(fr1.getName());
 		rec1 = recommendationsDao.delete(rec1);
-		System.out.println(rec1.getUserName());
 		res1 = reservationsDao.delete(res1);
-		System.out.println(res1.getUserName());
 		res = restaurantsDao.delete(res);
-		System.out.println(res.getName());
 		rev1 = reviewsDao.delete(rev1);
-		System.out.println(rev1.getUserName());
 		sr1 = sitDownRestaurantsDao.delete(sr1);
-		System.out.println(sr1.getName());
 		tr1 = takeOutRestaurantsDao.delete(tr1);
-		System.out.println(tr1.getName());
 		user1 = usersDao.delete(user1);
-		System.out.println(user1);
+		try {
+			System.out.println(res.getName());
+		}
+		catch (NullPointerException sql) {
+			System.out.println("res has been deleted so can't operate on it");
+		}
 		try {
 			user1 = usersDao.delete(user1);
 		}
-		catch (SQLException sql) {
+		catch (NullPointerException sql) {
 			System.out.println("user1 already deleted, proper error thrown");
 
 

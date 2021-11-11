@@ -55,7 +55,7 @@ public class CreditCardsDao {
     }
 
     public CreditCards getCreditCardByCardNumber(long cardNumber) throws SQLException {
-        String selectCC = "SELECT CardNumber FROM CreditCards WHERE CardNumber=?;";
+        String selectCC = "SELECT CardNumber,expiration,username FROM CreditCards WHERE CardNumber=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -66,7 +66,7 @@ public class CreditCardsDao {
             results = selectStmt.executeQuery();
             if(results.next()) {
                 Long resultCardNumber = results.getLong("CardNumber");
-                Date expiration = results.getDate("Expiration");
+                Date expiration = results.getDate("expiration");
                 String UserName = results.getString("UserName");
                 CreditCards cc = new CreditCards(resultCardNumber,expiration,UserName);
                 return cc;

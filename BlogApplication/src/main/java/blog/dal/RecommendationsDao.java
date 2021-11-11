@@ -12,7 +12,7 @@ public class RecommendationsDao {
   protected ConnectionManager connectionManager;
   private static RecommendationsDao instance = null;
   protected RecommendationsDao() {
-    super();
+    connectionManager = new ConnectionManager();
   }
   public static RecommendationsDao getInstance() {
     if(instance == null) {

@@ -37,7 +37,8 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
         foodCartRestaurant.getCuisine(), foodCartRestaurant.getStreet1(),
         foodCartRestaurant.getStreet2(), foodCartRestaurant.getCity(), foodCartRestaurant.getState(),
         foodCartRestaurant.getZip(), foodCartRestaurant.getCompanyName()));
-    String insertRestaurant = "INSERT INTO FoodCartRestaurant(licensed) VALUES(?);";
+    String insertRestaurant = "INSERT INTO FoodCartRestaurant(RestaurantId,licensed) VALUES((select restaurantId from restaurants where name=? and description=? and menu=? and hours=? and active=? and cuisinetype=? and street1=? and street2=? and city=? and state=? and zip=? and companyName=?),?);";
+
     Connection connection = null;
     PreparedStatement insertStmt = null;
     try {
@@ -49,7 +50,19 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
       // http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
       // For nullable fields, you can check the property first and then call setNull()
       // as applicable.
-      insertStmt.setBoolean(1, foodCartRestaurant.getLicensed());
+      insertStmt.setString(1, foodCartRestaurant.getName());
+      insertStmt.setString(2, foodCartRestaurant.getDescription());
+      insertStmt.setString(3, foodCartRestaurant.getMenu());
+      insertStmt.setString(4, foodCartRestaurant.getHours());
+      insertStmt.setBoolean(5, foodCartRestaurant.getActive());
+      insertStmt.setString(6, foodCartRestaurant.getCuisine().toString());
+      insertStmt.setString(7, foodCartRestaurant.getStreet1());
+      insertStmt.setString(8, foodCartRestaurant.getStreet2());
+      insertStmt.setString(9, foodCartRestaurant.getCity());
+      insertStmt.setString(10, foodCartRestaurant.getState());
+      insertStmt.setInt(11, foodCartRestaurant.getZip());
+      insertStmt.setString(12, foodCartRestaurant.getCompanyName());
+      insertStmt.setBoolean(13, foodCartRestaurant.getLicensed());
       // Note that we call executeUpdate(). This is used for a INSERT/UPDATE/DELETE
       // statements, and it returns an int for the row counts affected (or 0 if the
       // statement returns nothing). For more information, see:
@@ -76,7 +89,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
   }
 
   public FoodCartRestaurants getFoodCartRestaurantById(int foodCartRestaurantId) throws SQLException {
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,foodCartRestaurant.licensed as licensed FROM foodCartRestaurant inner join Restaurants on foodCartRestaurant.RestaurantId = Restaurants.RestaurantId WHERE restaurantId=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName,foodCartRestaurant.licensed as licensed FROM foodCartRestaurant inner join Restaurants on foodCartRestaurant.RestaurantId = Restaurants.RestaurantId WHERE foodcartrestaurant.restaurantId=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -98,7 +111,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object cuisine = results.getObject("cuisine");
+        String cuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
@@ -106,7 +119,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
         Integer zip  =  results.getInt("zip");
         String companyName = results.getString("companyname");
         Boolean licensed = results.getBoolean("licensed");
-        FoodCartRestaurants restaurant = new FoodCartRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,companyName, licensed);
+        FoodCartRestaurants restaurant = new FoodCartRestaurants(name,description,menu,hours,active, Cuisines.valueOf(cuisine),street1,street2,city,state,zip,companyName, licensed);
         return restaurant;
       }
     } catch (SQLException e) {
@@ -128,7 +141,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
 
   public List<FoodCartRestaurants> getFoodCartRestaurantsByCompanyName(String companyName) throws SQLException{
     List<FoodCartRestaurants> restaurants = new ArrayList<FoodCartRestaurants>();
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName,foodcartrestaurant.licensed as licensed FROM FoodCartRestaurant inner join Restaurants on FoodCartRestaurant.RestaurantId = Restaurants.RestaurantId WHERE companyname=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName,foodcartrestaurant.licensed as licensed FROM FoodCartRestaurant inner join Restaurants on FoodCartRestaurant.RestaurantId = Restaurants.RestaurantId WHERE companyname=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -150,7 +163,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object cuisine = results.getObject("cuisine");
+        String cuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
@@ -158,7 +171,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
         Integer zip  =  results.getInt("zip");
         String resultCompanyName = results.getString("companyname");
         Boolean licensed = results.getBoolean("licensed");
-        FoodCartRestaurants restaurant = new FoodCartRestaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,resultCompanyName, licensed);
+        FoodCartRestaurants restaurant = new FoodCartRestaurants(name,description,menu,hours,active, Cuisines.valueOf(cuisine),street1,street2,city,state,zip,resultCompanyName, licensed);
         restaurants.add(restaurant);
       }
     } catch (SQLException e) {
@@ -179,7 +192,7 @@ public class FoodCartRestaurantsDao extends RestaurantsDao{
   }
 
   public FoodCartRestaurants delete(FoodCartRestaurants foodCartRestaurant) throws SQLException{
-    String deleteFoodCartRestaurants = "DELETE FROM FoodCartRestaurant join Restaurants on FoodCartRestaurant.RestaurantId = Restaurants.RestaurantId WHERE Restaurants.name=?;";
+    String deleteFoodCartRestaurants = "DELETE FoodCartRestaurant FROM FoodCartRestaurant inner join Restaurants on FoodCartRestaurant.RestaurantId = Restaurants.RestaurantId WHERE Restaurants.name=?;";
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {

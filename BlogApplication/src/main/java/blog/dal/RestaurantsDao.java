@@ -47,7 +47,7 @@ public class RestaurantsDao {
       insertStmt.setString(3, restaurant.getMenu());
       insertStmt.setString(4, restaurant.getHours());
       insertStmt.setBoolean(5, restaurant.getActive());
-      insertStmt.setObject(6, restaurant.getCuisine());
+      insertStmt.setString(6, restaurant.getCuisine().toString());
       insertStmt.setString(7, restaurant.getStreet1());
       insertStmt.setString(8, restaurant.getStreet2());
       insertStmt.setString(9, restaurant.getCity());
@@ -84,7 +84,7 @@ public class RestaurantsDao {
    * This runs a SELECT statement and returns a single Persons instance.
    */
   public Restaurants getRestaurantById(int restaurantId) throws SQLException {
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE restaurantId=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE restaurantId=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -106,14 +106,14 @@ public class RestaurantsDao {
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object cuisine = results.getObject("cuisine");
+        String cuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
         String state = results.getString("state");
         Integer zip  =  results.getInt("zip");
         String companyName = results.getString("companyname");
-        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,companyName);
+        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, Cuisines.valueOf(cuisine),street1,street2,city,state,zip,companyName);
         return restaurant;
       }
     } catch (SQLException e) {
@@ -135,14 +135,14 @@ public class RestaurantsDao {
 
   public List<Restaurants> getRestaurantsByCuisine(Cuisines cuisine) throws SQLException{
     List<Restaurants> restaurants = new ArrayList<Restaurants>();
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE cuisine=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE Cuisinetype=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
     try {
       connection = connectionManager.getConnection();
       selectStmt = connection.prepareStatement(selectRestaurant);
-      selectStmt.setObject(1, cuisine);
+      selectStmt.setString(1, cuisine.toString());
       // Note that we call executeQuery(). This is used for a SELECT statement
       // because it returns a result set. For more information, see:
       // http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
@@ -157,14 +157,14 @@ public class RestaurantsDao {
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object resultCuisine = results.getObject("cuisine");
+        String resultCuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
         String state = results.getString("state");
         Integer zip  =  results.getInt("zip");
         String companyName = results.getString("companyname");
-        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, (Cuisines) resultCuisine,street1,street2,city,state,zip,companyName);
+        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, Cuisines.valueOf(resultCuisine),street1,street2,city,state,zip,companyName);
         restaurants.add(restaurant);
       }
     } catch (SQLException e) {
@@ -186,7 +186,7 @@ public class RestaurantsDao {
 
   public List<Restaurants> getRestaurantsByCompanyName(String companyName) throws SQLException{
     List<Restaurants> restaurants = new ArrayList<Restaurants>();
-    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisine,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE companyname=?;";
+    String selectRestaurant = "SELECT Name,Description,Menu,Hours,Active,Cuisinetype,Street1,Street2,City,State,Zip,CompanyName FROM Restaurants WHERE companyname=?;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
@@ -208,14 +208,14 @@ public class RestaurantsDao {
         String menu = results.getString("menu");
         String hours = results.getString("hours");
         Boolean active = results.getBoolean("active");
-        Object cuisine = results.getObject("cuisine");
+        String cuisine = results.getString("Cuisinetype");
         String street1 = results.getString("street1");
         String street2 = results.getString("street2");
         String city = results.getString("city");
         String state = results.getString("state");
         Integer zip  =  results.getInt("zip");
         String resultCompanyName = results.getString("companyname");
-        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, (Cuisines) cuisine,street1,street2,city,state,zip,resultCompanyName);
+        Restaurants restaurant = new Restaurants(name,description,menu,hours,active, Cuisines.valueOf(cuisine),street1,street2,city,state,zip,resultCompanyName);
         restaurants.add(restaurant);
       }
     } catch (SQLException e) {
@@ -240,7 +240,7 @@ public class RestaurantsDao {
    * This runs a DELETE statement.
    */
   public Restaurants delete(Restaurants restaurant) throws SQLException {
-    String deleteRestaurant = "DELETE FROM Restaurant WHERE name=?;";
+    String deleteRestaurant = "DELETE FROM Restaurants WHERE name=?;";
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {
