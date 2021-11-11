@@ -102,14 +102,15 @@ public class Inserter {
 		for (Restaurants r : companyRestaurants) {
 			System.out.println(r.getName());
 		}
-
+		System.out.println("---------------");
 		CreditCards cc3 =  creditCardsDao.getCreditCardByCardNumber(445L);
 		System.out.println("cc3 is " + cc3.getCardNumber());
-
+		System.out.println("---------------");
 		List<CreditCards> cc4 = creditCardsDao.getCreditCardsByUserName("a");
 		for (CreditCards c: cc4) {
 			System.out.println(c.getCardNumber());
 		}
+		System.out.println("---------------");
 		FoodCartRestaurants fc3 = foodCartRestaurantsDao.getFoodCartRestaurantById(6);
 		System.out.println("fc3 is " + fc3.getName());
 		List<FoodCartRestaurants> fc4 = foodCartRestaurantsDao.getFoodCartRestaurantsByCompanyName("company2");
@@ -119,57 +120,59 @@ public class Inserter {
 
 		Recommendations rec3 = recommendationsDao.getRecommendationById(1);
 		System.out.println("Rec3 is " + rec3.getUserName());
-
+		System.out.println("---------------");
 		List<Recommendations> recs = recommendationsDao.getRecommendationsByRestaurantId(3);
 		for(Recommendations rec: recs) {
 			System.out.println(rec.getRestaurantId());
 		}
-
+		System.out.println("---------------");
 		recs = recommendationsDao.getRecommendationsByUserName("Bruce");
 		for(Recommendations rec: recs) {
 			System.out.println(rec.getUserName());
 		}
-
+		System.out.println("---------------");
 		Reservations res4 = reservationsDao.getReservationById(1);
 		System.out.println("Res4 is " + res4.getStart());
-
+		System.out.println("---------------");
 		List<Reservations> rezs =  reservationsDao.getReservationsByUserName("Bruce");
 		for(Reservations r: rezs) {
 			System.out.println(r.getUserName());
 		}
-
+		System.out.println("---------------");
 		rezs = reservationsDao.getReservationsBySitDownRestaurantId(1);
 		for(Reservations r: rezs) {
 			System.out.println(r.getUserName());
 		}
-
+		System.out.println("---------------");
 		Reviews rev3 = reviewsDao.getReviewById(1);
 		System.out.println("rev3 is " + rev3.getUserName());
-
+		System.out.println("---------------");
 		List<Reviews> revs = reviewsDao.getReviewsByRestaurantId(9);
 		for(Reviews r: revs) {
 			System.out.println(r.getRestaurantId());
 		}
-
+		System.out.println("---------------");
 		revs = reviewsDao.getReviewsByUserName("Bruce");
 		for(Reviews r: revs) {
 			System.out.println(r.getUserName());
 		}
-
+		System.out.println("---------------");
 		SitDownRestaurants sr4 = sitDownRestaurantsDao.getSitDownRestaurantById(1);
 		System.out.println("sr4 is " + sr4.getCapacity());
-
+		System.out.println("---------------");
 		List<SitDownRestaurants> srs = sitDownRestaurantsDao.getSitDownRestaurantsByCompanyName("company1");
 		for(SitDownRestaurants sr: srs) {
 			System.out.println(sr.getCompanyName());
 		}
+		System.out.println("---------------");
 		TakeOutRestaurants tr4 = takeOutRestaurantsDao.getTakeOutRestaurantById(4);
 		System.out.println("tr4 is" + tr4.getName());
-
+		System.out.println("---------------");
 		List<TakeOutRestaurants> trs = takeOutRestaurantsDao.getTakeOutRestaurantsByCompanyName("company1");
 		for(TakeOutRestaurants tr: trs) {
 			System.out.println(tr.getCompanyName());
 		}
+		System.out.println("---------------");
 
 		// UPDATES
 		companies = companiesDao.updateCompanyAbout(companies, "new about");
