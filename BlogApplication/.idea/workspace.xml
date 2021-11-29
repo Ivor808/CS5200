@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8fcd1fd5-b2dc-4dcf-80f9-b728223cff30" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BlogApplication_war.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BlogApplication_war_exploded.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_javaee_web_api_8_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/taglibs_standard_impl_1_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/taglibs_standard_spec_1_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BlogApplication.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BlogApplication.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/CompaniesDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/blog/dal/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/CreditCardsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/FoodCartRestaurantsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/RecommendationsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/ReservationsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/RestaurantsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/ReviewsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/SitDownRestaurantsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/TakeOutRestaurantsDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/dal/UsersDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Companies.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/CreditCards.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Cuisines.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/FoodCartRestaurants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Recommendations.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Reservations.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Restaurants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Reviews.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/SitDownRestaurants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/TakeOutRestaurants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/model/Users.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/blog/tools/Inserter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/blog/tools/Inserter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/FindUsers.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/UserBlogPosts.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/UserCreate.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/UserDelete.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/UserPostBlogComments.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/UserUpdate.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/AdministratorsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/BlogCommentsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/BlogPostsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/BlogUsersDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/ConnectionManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/PersonsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/dal/ResharesDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/Administrators.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/BlogComments.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/BlogPosts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/BlogUsers$StatusLevel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/BlogUsers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/Persons.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/model/Reshares.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/servlet/FindUsers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/servlet/UserBlogPosts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/servlet/UserCreate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/servlet/UserDelete.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/servlet/UserPostBlogComments.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/servlet/UserUpdate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/classes/blog/tools/Inserter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/lib/mysql-connector-java-8.0.16.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/BlogApplication-1.0-SNAPSHOT/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/CompaniesDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/ConnectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/blog/dal/ConnectionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/CreditCardsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/FoodCartRestaurantsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/RecommendationsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/ReservationsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/RestaurantsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/ReviewsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/SitDownRestaurantsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/TakeOutRestaurantsDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/dal/UsersDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Companies.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/CreditCards.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Cuisines.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/FoodCartRestaurants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Recommendations.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Reservations.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Restaurants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Reviews.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/SitDownRestaurants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/TakeOutRestaurants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/model/Users.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/blog/tools/Inserter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/blog/tools/Inserter.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="219Xf079nhfHo6zieosxWOVBqVW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Composer" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8fcd1fd5-b2dc-4dcf-80f9-b728223cff30" name="Changes" comment="" />
+      <created>1637354386038</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637354386038</updated>
+      <workItem from="1637354390151" duration="186000" />
+      <workItem from="1637452966606" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

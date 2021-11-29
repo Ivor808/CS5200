@@ -13,7 +13,7 @@ import java.util.Properties;
  * In our example, we will create a DAO (data access object) java class to interact with
  * each MySQL table. The DAO java classes will use ConnectionManager to open and close
  * connections.
- * 
+ * test
  * Instructions:
  * 1. Install MySQL Community Server. During installation, you will need to set up a user,
  * password, and port. Keep track of these values.
@@ -42,7 +42,7 @@ public class ConnectionManager {
 	// Port to your database server. By default, this is 3307.
 	private final int port= 3306;
 	// Name of the MySQL schema that contains your tables.
-	private final String schema = "reviewapplication";
+	private final String schema = "BlogApplication";
 	// Default timezone for MySQL server.
 	private final String timezone = "UTC";
 
